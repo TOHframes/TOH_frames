@@ -57,6 +57,9 @@
         .flapjack, .hooty, .grave {
             position: absolute;
             user-select: none;
+			-webkit-user-select: none;  /* Chrome, Safari and Opera */
+            -moz-user-select: none;     /* Firefox */
+            -ms-user-select: none;      /* IE/Edge */
         }
         #restartButton {
             font-size: 1.2em;
@@ -72,16 +75,34 @@
         #restartButton:hover {
             background-color: #ff000050;
         }
+        #controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+        }
+		#soundControl {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            z-index: 2;
+			opacity: 20%;
+        }
     </style>
 </head>
 <body>
-    <div id="score">Score: 0</div>
-    <div id="gameover">
-        <div>Game Over!</div>
-        <div id="finalScore"></div>
-        <button id="restartButton" style="display: none;">Restart</button>
-    </div>
-    <div id="game"></div>
+	<div id="score">Score: 0</div>
+		<div id="gameover">
+			<div>Game Over!</div>
+			<div id="finalScore"></div>
+			<button id="restartButton" style="display: none;">Restart</button>
+		</div>
+		<div id="game"></div>
+		<img id="soundControl" src="https://raw.githubusercontent.com/TOHframes/TOH_frames/main/speaker2.png" onclick="toggleMusic()">
+		<audio id="backgroundMusic" loop preload="none">
+			<source src="https://raw.githubusercontent.com/TOHframes/TOH_frames/main/Undertale%20-%20Megalovania%20(152kbit_Opus).opus" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
 
     <script>
         var score = 0;
@@ -97,11 +118,21 @@
             img.className = src.split('.')[0];
             img.style.position = 'absolute'; 
 
+			if (src.includes('flapjack.png')) {
+				img.className = 'flapjack';
+			} else if (src.includes('hooty.png')) {
+				img.className = 'hooty';
+			}
+
             img.onload = function() {
                 img.style.left = `${Math.random() * (window.innerWidth - img.width)}px`;
                 img.style.top = `${Math.random() * (window.innerHeight - img.height)}px`;
                 gameArea.appendChild(img);
-                setTimeout(() => gameArea.removeChild(img), timeout);
+                setTimeout(() => {
+					if (gameArea.contains(img)) {
+						gameArea.removeChild(img);
+					}
+				}, timeout);
             };
 
             img.onerror = function() {
@@ -124,7 +155,9 @@
             grave.style.left = left + 'px';
             grave.style.top = this.style.top;
             gameArea.appendChild(grave);
-            gameArea.removeChild(this);
+				if (gameArea.contains(this)) {
+					gameArea.removeChild(this);
+				}
         }
 
         function hootyClick() {
@@ -140,9 +173,9 @@
             });
         }
 
-        restartButton.onclick = function() {
-            location.reload();
-        }
+
+            restartButton.onclick = resetGame;
+
 
         var gameIntervalTime = 1000;
         var gameInterval = setInterval(() => {
@@ -163,6 +196,69 @@
             }, gameIntervalTime);
         }, 2000);
 
+        var soundControl = document.getElementById('soundControl');
+        var isMusicPlaying = false;
+
+        function toggleMusic() {
+            var backgroundMusic = document.getElementById('backgroundMusic');
+            if (isMusicPlaying) {
+                backgroundMusic.pause();
+                soundControl.src = "https://raw.githubusercontent.com/TOHframes/TOH_frames/main/speaker2.png";
+            } else {
+                backgroundMusic.play();
+                soundControl.src = "https://raw.githubusercontent.com/TOHframes/TOH_frames/main/speaker1.png";
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+
+        window.onload = function() {
+            var backgroundMusic = document.getElementById('backgroundMusic');
+            backgroundMusic.play();
+        };
+		
+		
+		
+		
+		
+		
+		
+		function resetGame() {
+    // Reset variables
+    score = 0;
+    gameIntervalTime = 1000;
+    gameoverDisplay.style.display = 'none';
+    restartButton.style.display = 'none';
+    scoreDisplay.textContent = 'Score: ' + score;
+
+    // Clear game area
+    Array.from(gameArea.children).forEach(child => {
+        if (gameArea.contains(child)) {
+            gameArea.removeChild(child);
+        }
+    });
+
+    // Restart game interval
+    clearInterval(gameInterval);
+    clearInterval(gameSpeedup);
+    gameInterval = setInterval(() => {
+        createImage('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/flapjack.png', flapjackClick, Math.random() * 2000 + 1000);
+        if (Math.random() < 0.3) {
+            createImage('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/hooty.png', hootyClick, Math.random() * 2000 + 1000);
+        }
+    }, gameIntervalTime);
+
+    // Restart game speedup
+    gameSpeedup = setInterval(() => {
+        gameIntervalTime = Math.max(300, gameIntervalTime - 50);
+        clearInterval(gameInterval);
+        gameInterval = setInterval(() => {
+            createImage('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/flapjack.png', flapjackClick, Math.random() * 2000 + 1000);
+            if (Math.random() < 0.3) {
+                createImage('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/hooty.png', hootyClick, Math.random() * 2000 + 1000);
+            }
+        }, gameIntervalTime);
+    }, 2000);
+}
     </script>
 </body>
 </html>
