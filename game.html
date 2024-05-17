@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Flapjack Game">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/TOHframes/TOH_frames/main/flapjack_poster.png">
+    <title>Flapjack Game</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+            background-image: 
+            linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+            url('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/bg.jpeg'); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: url('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/cursor1.png') 20 55, auto;
+        }
+        body:active {
+            cursor: url('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/cursor2.png') 45 45, auto;
+        }
+        #game {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        #score {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 2em;
+            color: #ffd700;
+            z-index: 1;
+        }
+        #gameover {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: red;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 2;
+        }
+        .flapjack, .hooty, .grave {
+            position: absolute;
+            user-select: none;
+        }
+        #restartButton {
+            font-size: 1.2em;
+            margin-top:20px;
+            padding: 10px 20px;
+            width:100%;
+            border: 2px solid red;
+            border-radius: 15px;
+            background: none;
+            color: red;
+            cursor: url('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/cursor1.png') 20 55, auto;
+        }
+        #restartButton:hover {
+            background-color: #ff000050;
+        }
+    </style>
+</head>
+<body>
+    <div id="score">Score: 0</div>
+    <div id="gameover">
+        <div>Game Over!</div>
+        <div id="finalScore"></div>
+        <button id="restartButton" style="display: none;">Restart</button>
+    </div>
+    <div id="game"></div>
+
+    <script>
+        var score = 0;
+        var gameArea = document.getElementById('game');
+        var scoreDisplay = document.getElementById('score');
+        var gameoverDisplay = document.getElementById('gameover');
+        var finalScoreDisplay = document.getElementById('finalScore');
+        var restartButton = document.getElementById('restartButton');
+
+        function createImage(src, onclick, timeout) {
+            var img = document.createElement('img');
+            img.src = src;
+            img.className = src.split('.')[0];
+            img.style.position = 'absolute'; 
+
+            img.onload = function() {
+                img.style.left = `${Math.random() * (window.innerWidth - img.width)}px`;
+                img.style.top = `${Math.random() * (window.innerHeight - img.height)}px`;
+                gameArea.appendChild(img);
+                setTimeout(() => gameArea.removeChild(img), timeout);
+            };
+
+            img.onerror = function() {
+                console.error('Failed to load image:', src);
+            };
+
+            img.onmousedown = onclick;
+        }
+
+        function flapjackClick(e) {
+            e.stopPropagation();
+            this.onclick = null;
+            score++;
+            scoreDisplay.textContent = 'Score: ' + score;
+            var grave = document.createElement('img');
+            grave.src = 'https://raw.githubusercontent.com/TOHframes/TOH_frames/main/grave.png';
+            grave.className = 'grave';
+            var left = parseInt(this.style.left, 10);
+            left = left - 10;
+            grave.style.left = left + 'px';
+            grave.style.top = this.style.top;
+            gameArea.appendChild(grave);
+            gameArea.removeChild(this);
+        }
+
+        function hootyClick() {
+            gameoverDisplay.style.display = 'block';
+            restartButton.style.display = 'block';
+            finalScoreDisplay.textContent = 'Final Score: ' + score;
+            clearInterval(gameInterval);
+            clearInterval(gameSpeedup);
+            Array.from(gameArea.children).forEach(child => {
+                if (child.className !== 'grave') {
+                    gameArea.removeChild(child);
+                }
+            });
+        }
+
+        restartButton.onclick = function() {
+            location.reload();
+        }
+
+        var gameIntervalTime = 1000;
+        var gameInterval = setInterval(() => {
+            createImage('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/flapjack.png', flapjackClick, Math.random() * 2000 + 1000);
+            if (Math.random() < 0.3) {
+                createImage('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/hooty.png', hootyClick, Math.random() * 2000 + 1000);
+            }
+        }, gameIntervalTime);
+
+        var gameSpeedup = setInterval(() => {
+            gameIntervalTime = Math.max(300, gameIntervalTime - 50);
+            clearInterval(gameInterval);
+            gameInterval = setInterval(() => {
+                createImage('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/flapjack.png', flapjackClick, Math.random() * 2000 + 1000);
+                if (Math.random() < 0.3) {
+                    createImage('https://raw.githubusercontent.com/TOHframes/TOH_frames/main/hooty.png', hootyClick, Math.random() * 2000 + 1000);
+                }
+            }, gameIntervalTime);
+        }, 2000);
+
+    </script>
+</body>
+</html>
