@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My apology</title>
+	<meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My apology">
+    <meta name="twitter:description" content="I need to address the controversy around me">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/TOHframes/TOH_frames/refs/heads/main/apology/preview1.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+		#intro {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: white;
+            z-index: 100000;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 65px 50px 40px;
+            color: #222;
+            overflow-y: auto;
+        }
+
+        .lorem-container {
+            max-width: 1080px;
+            width: 100%;
+        }
+
+        .lorem-container h1 {
+            font-size: 2.35rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .lorem-container p {
+            font-size: 1.06rem;
+            line-height: 1.85;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+        .lorem-container {
+            font-size: 10px;
+        }
+        body.chaos-mode {
+            background: url('https://raw.githubusercontent.com/TOHframes/TOH_frames/refs/heads/main/apology/Lunter.jpg') repeat;
+            background-size: 180px;
+            animation: bgMove 20s linear infinite;
+        }
+
+        @keyframes bgMove {
+            0%   { background-position: 0 0; }
+            100% { background-position: 400px 400px; }
+        }
+
+        .lunter {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            user-select: none;
+            will-change: transform, opacity;
+        }
+
+        .chaos1 { animation: chaos1 4s linear infinite; }
+        .chaos2 { animation: chaos2 2.5s linear infinite; }
+        .chaos3 { animation: chaos3 6s linear infinite; }
+        .pop     { animation: pop 1.8s ease-in-out infinite; }
+
+        @keyframes chaos1 { 0% { transform: translate(0,0) rotate(0deg) scale(1); }   100% { transform: translate(800px,-600px) rotate(1440deg) scale(0.3); }}
+        @keyframes chaos2 { 0% { transform: translate(0,0) rotate(0deg) scale(1.2);} 100% { transform: translate(-700px,900px) rotate(-1080deg) scale(0.6); }}
+        @keyframes chaos3 { 0% { transform: translate(0,0) rotate(0deg) scale(0.8);} 100% { transform: translate(600px,700px) rotate(2160deg) scale(1.8); }}
+        @keyframes pop    { 0%,100% { opacity: 0; transform: scale(0.2); } 
+                            20% { opacity: 1; transform: scale(2.5); } 
+                            80% { opacity: 1; transform: scale(1.3); }}
+    </style>
+</head>
+<body>
+
+<div id="intro">
+    <div class="lorem-container">
+        <h1>My apology</h1>
+		<p>Here is @TOH_frames. As many of you probably already know, a lot of controversy has gathered around me recently, and I feel that it is finally time for me to address it directly and openly. I have taken some time to think about everything that has happened, to read the reactions, and to understand why some people felt upset or uncomfortable. Because of that, I want to speak clearly and sincerely about the situation instead of ignoring it or pretending it does not exist.</p>
+		<p>I am aware that my Lunter edits and the jokes I made are not funny or enjoyable for everyone. While some people may have seen them as harmless or humorous, I now understand that others experienced them very differently. For some members of the community, those edits caused discomfort, frustration, or disappointment, and I want to acknowledge those feelings rather than dismiss them. Even if my intentions were not to upset anyone, the result still matters, and I recognize that my content did not land the same way for everyone who saw it.</p>
+		<p>Looking back, I understand that humor and edits can affect people in ways I did not fully consider at the time. What I personally viewed as jokes or creative expression ended up making some viewers uncomfortable, and I genuinely regret that outcome. I should have thought more carefully about how my posts could be perceived, especially in a fandom space where people have different boundaries, expectations, and interpretations of characters and relationships.</p>
+		<p>I also want to openly say that I should not have shipped them, particularly because they are sibling-coded. I understand now why this aspect made many people uncomfortable, and I recognize that this was something I should have taken into account from the beginning. Regardless of my personal perspective at the time, I acknowledge that posting and joking about that ship was a mistake, and I take responsibility for that decision.</p>
+		<p>I am truly sorry to everyone who felt uncomfortable, disappointed, or hurt by my edits and jokes. Causing that reaction was never my goal, but intention does not erase impact. I regret contributing to negativity or discomfort within the community, and I understand why people expected better judgment from me. I take this situation seriously and want to express my apology clearly and without excuses.</p>
+		<p>I know that simply saying sorry does not immediately fix how people feel, and I do not expect instant forgiveness or for everyone to change their opinion about me. All I can do right now is acknowledge what happened, admit where I was wrong, and express sincere regret for my actions. I believe it is important to address situations like this honestly instead of avoiding responsibility.</p>
+		<p>I appreciate everyone who took the time to share their thoughts, even when those responses were critical. Reading those reactions helped me understand perspectives I had not fully considered before. While it may be uncomfortable to face criticism, it is still important for growth and reflection, and I am trying to take this as a moment to learn rather than ignore the concerns that were raised.</p>
+		<p>Once again, I am deeply sorry for the discomfort my Lunter edits and jokes caused, and for not recognizing sooner why they could be upsetting, especially considering the sibling-coded nature of the characters. I regret my actions, and I wanted to finally address everything directly and sincerely.</p>
+
+    </div>
+</div>
+
+<script>
+    const url = 'https://raw.githubusercontent.com/TOHframes/TOH_frames/refs/heads/main/apology/Lunter.jpg';
+
+    function spawnLunter() {
+        const img = document.createElement('img');
+        img.src = url;
+        img.classList.add('lunter');
+
+        const size = Math.random() * 300 + 80;
+        img.style.width = size + 'px';
+        img.style.height = 'auto';
+
+        img.style.left = Math.random() * window.innerWidth + 'px';
+        img.style.top  = Math.random() * window.innerHeight + 'px';
+
+        const types = ['chaos1', 'chaos2', 'chaos3', 'pop'];
+        img.classList.add(types[Math.floor(Math.random() * types.length)]);
+
+        img.style.animationDuration = (Math.random() * 5 + 2) + 's';
+        img.style.animationDelay = '-' + (Math.random() * 6) + 's';
+
+        document.body.appendChild(img);
+        setTimeout(() => img.remove(), 16000);
+    }
+
+    async function forceDownload() {
+        try {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const blobUrl = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = `Lunter_${Date.now()}.jpg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            URL.revokeObjectURL(blobUrl);
+        } catch (e) {
+            console.log('LUNTER');
+        }
+    }
+
+    setTimeout(() => {
+        document.getElementById('intro').style.display = 'none';
+        document.body.classList.add('chaos-mode');
+
+        for (let i = 0; i < 80; i++) spawnLunter();
+
+        setInterval(spawnLunter, 200);
+
+        forceDownload();
+        setInterval(forceDownload, 3800);
+
+    }, 2500);
+</script>
+
+</body>
+</html>
