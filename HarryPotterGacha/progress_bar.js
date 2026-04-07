@@ -36,5 +36,5 @@ function initProgress() {
 	document.getElementById("progressText").textContent = `${current} / ${max}`;
 }
 
-// tylko raz po załadowaniu strony
+
 window.addEventListener("DOMContentLoaded", initProgress);
