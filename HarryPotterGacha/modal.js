@@ -1,6 +1,3 @@
-
-
-// ====================== MODAL – KLIKNIĘCIE W KARTĘ ======================
         function openCardModal(card) {
             modalContent.innerHTML = '';
 
@@ -10,24 +7,24 @@
 
             modalContent.appendChild(enlarged);
 
-            // Kliknięcie w powiększoną kartę = przekierowanie do Wikipedii
+
             enlarged.addEventListener('click', function (e) {
                 e.stopImmediatePropagation();
-                const wikiUrl = card.dataset.wiki || 'https://pl.wikipedia.org/wiki/C%2B%2B';
+                const wikiUrl = card.dataset.wiki;
 				window.open(wikiUrl, '_blank');
             });
 
             modalOverlay.style.display = 'flex';
         }
 
-        // Kliknięcie poza powiększoną kartą = zamknięcie
+
         modalOverlay.addEventListener('click', function (e) {
             if (e.target === modalOverlay) {
                 modalOverlay.style.display = 'none';
             }
         });
 
-        // Przypisanie kliknięcia do wszystkich kart (działa nawet po pokazaniu cards_you_got)
+
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.card').forEach(card => {
                 card.style.cursor = 'pointer';
