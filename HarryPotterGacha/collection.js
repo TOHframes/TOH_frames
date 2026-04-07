@@ -2,7 +2,7 @@ let searchQuery = "";
 
 let currentFilter = null;
 	let currentSort = null;
-	let sortDirection = 1; // 1 = asc, -1 = desc
+	let sortDirection = 1;
 
 
 function getRarityColor(rarity) {
@@ -40,19 +40,19 @@ function getRarityColor(rarity) {
 	function renderTable() {
 		let cards = getCardsFromStorage();
 
-		// FILTER
+
 		if (currentFilter) {
 			cards = cards.filter(c => c.rarity === currentFilter);
 		}
 
-		// SEARCH (*fraza*)
+
 		if (searchQuery) {
 			cards = cards.filter(c => 
 				(c.name || "").toLowerCase().includes(searchQuery)
 			);
 		}
 
-		// SORT
+
 		if (currentSort) {
 			cards.sort((a, b) => {
 				let valA = a[currentSort];
@@ -106,7 +106,7 @@ function getRarityColor(rarity) {
 			currentFilter = rarity;
 		}
 
-		// update UI
+
 		
 		document.querySelectorAll("button[data-rarity]").forEach(btn => {
 			btn.classList.toggle("active", btn.dataset.rarity === currentFilter);
@@ -117,7 +117,7 @@ function getRarityColor(rarity) {
 
 	function setSort(field) {
 		if (currentSort === field) {
-			sortDirection *= -1; // zmiana kierunku
+			sortDirection *= -1;
 		} else {
 			currentSort = field;
 			sortDirection = 1;
@@ -132,5 +132,4 @@ document.getElementById("searchInput").addEventListener("input", function (e) {
 	renderTable();
 });
 
-	// init
 	renderTable();
