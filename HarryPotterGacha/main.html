@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter Gacha</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="cards.js" defer></script>
+	<script src="modal.js" defer></script>
+	<script src="back.js" defer></script>
+	<script src="pack_click.js" defer></script>
+	<link rel="icon" href="icon.ico">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="nav">
+            <a href="#" class="active">Gacha</a>
+            <a href="collection.html">Collection</a>
+        </div>
+
+    </header>
+
+
+
+
+    <!-- GŁÓWNY PACK -->
+    <div class="pack-wrapper" id="pack">
+        <!-- TUTAJ WSTAW SWOJĄ PNG -->
+        <img src="pack.png" id="full-pack"/>
+    </div>
+	
+	
+	<!-- KARTY WYGRANE -->
+	<div class="cards_you_got" id="cards_you_got">
+		<div class="card">
+			<div class="top-banner">
+				<div class="rarity"></div>
+				<div class="name"></div>
+			</div>
+
+			<div class="artwork">
+				<span></span>
+				<img>
+			</div>
+			<div class="info">
+				<div class="description"></div>
+			</div>
+			<div class="stats">
+				<div class="stat">
+					<div class="label">ATK</div>
+					<div class="value"></div>
+				</div>
+				<div class="stat">
+					<div class="label">DEF</div>
+					<div class="value"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- KARTA 2 – niebieska (przykład innej rzadkości) -->
+		<div class="card">
+			<div class="top-banner">
+				<div class="rarity"></div>
+				<div class="name"></div>
+			</div>
+
+			<div class="artwork">
+				<span></span>
+				<img>
+			</div>
+
+			<div class="info">
+				<div class="description"></div>
+			</div>
+
+			<div class="stats">
+				<div class="stat">
+					<div class="label">ATK</div>
+					<div class="value"></div>
+				</div>
+				<div class="stat">
+					<div class="label">DEF</div>
+					<div class="value"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- KARTA 3 – złota (kolejny przykład) -->
+		<div class="card">
+			<div class="top-banner">
+				<div class="rarity"></div>
+				<div class="name"></div>
+			</div>
+
+			<div class="artwork">
+				<span></span>
+				<img>
+			</div>
+
+			<div class="info">
+				<div class="description"></div>
+			</div>
+
+			<div class="stats">
+				<div class="stat">
+					<div class="label">ATK</div>
+					<div class="value"></div>
+				</div>
+				<div class="stat">
+					<div class="label">DEF</div>
+					<div class="value"></div>
+				</div>
+			</div>
+		</div>
+		
+			<!-- KARTA 4 – złota (kolejny przykład) -->
+		<div class="card">
+			<div class="top-banner">
+				<div class="rarity"></div>
+				<div class="name"></div>
+			</div>
+
+			<div class="artwork">
+				<span></span>
+				<img>
+			</div>
+
+			<div class="info">
+				<div class="description"></div>
+			</div>
+
+			<div class="stats">
+				<div class="stat">
+					<div class="label">ATK</div>
+					<div class="value"></div>
+				</div>
+				<div class="stat">
+					<div class="label">DEF</div>
+					<div class="value"></div>
+				</div>
+			</div>
+		</div>
+		
+			<!-- KARTA 5 – złota (kolejny przykład) -->
+		<div class="card">
+			<div class="top-banner">
+				<div class="rarity"></div>
+				<div class="name"></div>
+			</div>
+
+			<div class="artwork">
+				<span></span>
+				<img>
+			</div>
+
+			<div class="info">
+				<div class="description"></div>
+			</div>
+
+			<div class="stats">
+				<div class="stat">
+					<div class="label">ATK</div>
+					<div class="value"></div>
+				</div>
+				<div class="stat">
+					<div class="label">DEF</div>
+					<div class="value"></div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="back-button" id="back-button">Back to Packs</div>
+	</div>
+	
+	
+	<footer>thanks for playing :3</footer>
+
+
+
+<!-- MODAL – POWIĘKSZONA KARTA -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div id="modal-content"></div>
+    </div>
+
+
+
+<script>
+	const all_cards_you_got = document.querySelectorAll('.card');
+	const cards_you_got = document.getElementById('cards_you_got');
+	const backButton = document.getElementById('back-button');
+	const packWrapper = document.getElementById('pack');
+	const fullImg = document.getElementById('full-pack');
+	const modalOverlay = document.getElementById('modal-overlay');
+    const modalContent = document.getElementById('modal-content');
+	
+
+		
+</script>
+
+</body>
+</html>
