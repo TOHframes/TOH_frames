@@ -16,29 +16,29 @@ let cardData;
 cards_you_got.style.display = "none";	
 
 packWrapper.addEventListener('click', function () {
-	// Zapobiegamy wielokrotnemu klikaniu podczas animacji
+
 	if (packWrapper.classList.contains('opening')) return;
 	packWrapper.classList.add('opening');
 
-	// 1. Natychmiast resetujemy skalę hovera
+
 	packWrapper.style.transform = 'scale(1)';
 
-	// 2. Ukrywamy pełną paczkę
+
 	fullImg.style.transition = 'opacity 0.3s ease';
 	fullImg.style.opacity = '0';
 	packWrapper.classList.add("no-shadow");
 
-	// 3. Tworzymy kontener na połówki
+
 	const split = document.createElement('div');
 	split.className = 'split-pack';
 
-	// Górna połówka (zamień nazwę pliku na swoją!)
+
 	const topHalf = document.createElement('img');
 	topHalf.src = 'pack-top.png';   
 	topHalf.className = 'top-half';
 	topHalf.alt = 'Górna część paczki';
 
-	// Dolna połówka (zamień nazwę pliku na swoją!)
+
 	const bottomHalf = document.createElement('img');
 	bottomHalf.src = 'pack-bottom.png'; 
 	bottomHalf.className = 'bottom-half';
@@ -48,28 +48,27 @@ packWrapper.addEventListener('click', function () {
 	split.appendChild(bottomHalf);
 	packWrapper.appendChild(split);
 
-	// 4. Uruchamiamy animację rozerwania
+
 	setTimeout(() => {
 		topHalf.style.transform = 'translateY(-140px) rotate(12deg)';
 		bottomHalf.style.transform = 'translateY(140px)';
 	}, 80);
 
-	// 5. Po zakończeniu animacji – obie połówki znikają
+
 	setTimeout(() => {
 		split.classList.add('fade-out');
 		randomizeCard();
 		packWrapper.style.display = "none";
 		cards_you_got.style.display = "flex";
-		// Usuwamy połówki po zaniknięciu
+
 		setTimeout(() => {
 			if (split.parentNode) split.parentNode.removeChild(split);
 
-			// Opcjonalnie: zostawiamy paczkę ukrytą (gacha jednorazowa)
-			// fullImg.style.opacity = '1'; // odkomentuj jeśli chcesz przywrócić paczkę
+
 
 			packWrapper.classList.remove('opening');
 		}, 700);
-	}, 1300); // 1200ms animacja + 100ms zapasu
+	}, 1300); 
 });
 	
 	
@@ -83,7 +82,7 @@ function randomizeCard() {
 	all_cards_you_got.forEach(card => {
 
 		num = Math.floor(Math.random() * TOTAL_NUMBER_OF_CARDS) + 1;
-		//O E A P D T
+
 		whole_card = harryPotterData[num];
 		card.querySelector('.rarity').textContent = whole_card.rarity;
 		card.querySelector('.name').textContent = whole_card.title;
@@ -138,11 +137,6 @@ function randomizeCard() {
 		}
 
 		
-		
-		
-		
-		
-		
 		let data = localStorage.getItem(num);
 
 		if (data !== null) {
@@ -166,8 +160,6 @@ function randomizeCard() {
 			};
 			localStorage.setItem(num, JSON.stringify(cardData));
 		}
-
-
 
 	});
 }	
